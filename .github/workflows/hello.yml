@@ -1,0 +1,14 @@
+name: Hello Actions            # the name shown in the Actions tab
+
+on: [push, workflow_dispatch]  # WHEN: every push, or by clicking "Run workflow"
+
+jobs:
+  test:                        # a job runs on a fresh virtual machine
+    runs-on: ubuntu-latest
+    steps:                     # steps run in order; if one fails, the job stops
+      - uses: actions/checkout@v4          # get the code
+      - uses: actions/setup-python@v5      # install Python
+        with:
+          python-version: "3.11"
+      - run: pip install pytest
+      - run: python -m pytest -v
